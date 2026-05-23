@@ -18,6 +18,9 @@ When installed, Claude automatically uses this skill whenever you work with
   `daml.yaml` configuration, upgrades, and troubleshooting.
 - **Authorization modeling** — the signatory/observer/controller rules that catch
   out newcomers, and least-authority best practices.
+- **dApp wallet integration** — connecting browser dApps to Canton wallets via
+  [PartyLayer](https://github.com/PartyLayer/PartyLayer) (CIP-0103 multi-wallet
+  abstraction), and when to skip it.
 
 ## Installation
 
@@ -52,7 +55,8 @@ daml/
 └── references/
     ├── language.md           # DAML language reference
     ├── daml-script.md        # Daml Script testing reference
-    └── dpm-cli.md            # dpm CLI + daml.yaml/multi-package.yaml reference
+    ├── dpm-cli.md            # dpm CLI + daml.yaml/multi-package.yaml reference
+    └── partylayer.md         # PartyLayer (Canton wallet abstraction) integration
 ```
 
 `SKILL.md` carries the always-loaded guidance; the `references/` files are

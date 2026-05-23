@@ -1,6 +1,6 @@
 ---
 name: daml
-description: Develop, build, and test DAML (Digital Asset Modeling Language) smart contracts for the Canton Network. Use when writing or editing .daml files, defining templates/choices/contract keys, writing Daml Script tests, working with daml.yaml or multi-package.yaml, running dpm build/test/sandbox, generating Java/JS client bindings, or setting up a Canton/DAML development environment. Covers the dpm (Daml Package Manager) CLI, project structure, the DAML language, and testing patterns.
+description: Develop, build, and test DAML (Digital Asset Modeling Language) smart contracts for the Canton Network. Use when writing or editing .daml files, defining templates/choices/contract keys, writing Daml Script tests, working with daml.yaml or multi-package.yaml, running dpm build/test/sandbox, generating Java/JS client bindings, integrating a Canton wallet into a dApp (e.g. via PartyLayer / CIP-0103), or setting up a Canton/DAML development environment. Covers the dpm (Daml Package Manager) CLI, project structure, the DAML language, testing patterns, and dApp wallet integration.
 user-invocable: true
 license: MIT
 compatibility: Requires the dpm (Daml Package Manager) CLI, JDK 17+, and VS Code with the Daml extension
@@ -152,6 +152,25 @@ Run with `dpm test` (CLI / CI) or the "Script results" code lens in VS Code.
 Full testing reference — `submitMulti`, time control, queries, assertions,
 multi-package test setups: [references/daml-script.md](references/daml-script.md).
 
+## dApp wallet integration (optional)
+
+DAML/dpm cover the ledger side. For a browser dApp that needs to connect an
+end-user's Canton wallet, **[PartyLayer](https://github.com/PartyLayer/PartyLayer)**
+is one option — a TypeScript SDK that abstracts multiple wallets (Console
+Wallet, 5N Loop, Cantor8, Nightly, Bron, plus any CIP-0103 wallet auto-discovered
+via `window.canton.*`) behind one API. A successful connect returns
+`session.partyId`, which is the DAML `Party` the dApp submits as via the JSON
+Ledger API.
+
+```sh
+npm install @partylayer/sdk @partylayer/react   # React wrapper: PartyLayerKit
+```
+
+Requires Node 18+ / React 18+. Reach for it when you want multi-wallet support
+without writing an adapter per wallet; skip it for backend signers (use the JSON
+Ledger API directly) or when you only target one wallet's native API. Details,
+where-it-fits diagram, and caveats: [references/partylayer.md](references/partylayer.md).
+
 ## Best practices
 
 - **Least authority.** Add a party as `signatory` only if it must *authorize* the
@@ -188,6 +207,9 @@ multi-package test setups: [references/daml-script.md](references/daml-script.md
   Script: parties, submit/query/assert APIs, time control, patterns.
 - [references/dpm-cli.md](references/dpm-cli.md) — full `dpm` command reference,
   `daml.yaml`/`multi-package.yaml` config, codegen, sandbox, troubleshooting.
+- [references/partylayer.md](references/partylayer.md) — PartyLayer SDK for
+  multi-wallet dApp ↔ Canton integration via CIP-0103; install, where it fits,
+  and when not to use it.
 
 ## Authoritative docs
 
