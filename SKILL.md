@@ -201,6 +201,9 @@ where-it-fits diagram, and caveats: [references/partylayer.md](references/partyl
 
 ## Reference files
 
+- [references/cheat-sheet.md](references/cheat-sheet.md) — one-page syntax
+  recall: CLI, types, templates, choices, updates, scripts, JS/React API.
+  Start here for "what's the syntax for X?" lookups.
 - [references/language.md](references/language.md) — DAML language: templates,
   choices, contract keys, data types, interfaces, pattern matching, stdlib.
 - [references/daml-script.md](references/daml-script.md) — testing with Daml
